@@ -5,81 +5,162 @@
 ----------------------------------------------------------------
 1. INTEGRITY PLEDGE & LEARNING INTENT
 ----------------------------------------------------------------
-By submitting this file, I certify that the work in this 
-assignment is my own original work. I understand that I am 
-fully responsible for all content, code, and explanations 
-submitted. I have documented all sources of assistance, 
-including human collaborators, traditional resources, and 
+By submitting this file, I certify that the work in this
+assignment is my own original work. I understand that I am
+fully responsible for all content, code, and explanations
+submitted. I have documented all sources of assistance,
+including human collaborators, traditional resources, and
 Generative AI tools.
 
-INTENT PLEDGE: Before starting this assignment, my intention 
+INTENT PLEDGE: Before starting this assignment, my intention
 for using (or not using) AI tools to support my learning was:
-[ ] I plan to use GenAI as an interactive tutor/study aid.
+[X] I plan to use GenAI as an interactive tutor/study aid.
 [ ] I plan to use GenAI only for debugging or syntax help.
 [ ] I do not plan to use GenAI for this assignment.
 
 State briefly how you intended GenAI to support your learning:
 
+I use the same process on every project, including this homework.
+I start by working through the problem myself. I write down what
+the program has to do, then I research it: course material, online
+sources, Stack Overflow, and other GitHub repos. I do not ask
+GenAI to explain the assignment until I already know what I am
+building and how I want to build it.
 
+After that, GenAI supports the work I already started. I give my
+notes to Cursor, using the Grok model, and ask it to turn those
+notes into a build plan. I then apply that plan myself: I write
+the code as far as I can from my own notes. I use GenAI again
+only to double-check what I wrote, not to replace that step.
 
+So the intent is that I own the understanding and the code.
+GenAI is there to organize a plan from my notes and to check
+my work afterward.
 
-Failure to disclose the actual use of GenAI tools constitutes a 
-breach of academic integrity and will be handled under Academic 
+Failure to disclose the actual use of GenAI tools constitutes a
+breach of academic integrity and will be handled under Academic
 Misconduct procedures.
 
 ----------------------------------------------------------------
 2. HUMAN COLLABORATORS
 ----------------------------------------------------------------
-List names of any students you discussed high-level logic with, 
+List names of any students you discussed high-level logic with,
 or TAs/instructors who assisted you.
 
-Sources: 
+Sources:
 
+My tutorial TA, Katherine Hou, assisted me on how to approach
+this problem. I then found a solution based on that:
+
+1. Handle command-line arguments and load the glyph files.
+2. Parse the path commands.
+3. Layout, spacing, and scaling.
+4. Implement interactivity (scaling and scrolling).
 
 ----------------------------------------------------------------
 3. TRADITIONAL RESOURCES
 ----------------------------------------------------------------
-List any documentation, textbooks, or reference sites used 
+List any documentation, textbooks, or reference sites used
 (e.g., cppreference.com, language specs, course notes).
 
 Sources:
 
+SFML keyboard input
+https://www.sfml-dev.org/documentation/2.5.0/classsf_1_1Keyboard.html
+
+Zoom not updating on Windows with SFML
+https://stackoverflow.com/questions/78541031/im-on-windows-working-with-sfml-in-c-and-when-i-zoom-in-or-out-it-doesnt
+
+Using OpenGL with an SFML window
+https://www.sfml-dev.org/tutorials/2.3/window/opengl/
+
+Drawing a smooth curve in SFML
+https://stackoverflow.com/questions/41854922/drawing-a-smooth-curve-in-sfml
+
+What glyphs are used for
+https://stackoverflow.com/questions/3956673/what-do-we-use-glyph-for
+
+Guidev, Bezier Curves Explained
+https://www.youtube.com/watch?v=pnYccz1Ha34
+
+Freya Holmer, The Beauty of Bezier Curves
+https://www.youtube.com/watch?v=aVwxzDHniEw&t=19s
 
 ----------------------------------------------------------------
 4. GENERATIVE AI PROCESS & REFLECTION
 ----------------------------------------------------------------
-Usage of GenAI must be explicitly documented and reflected upon. 
+Usage of GenAI must be explicitly documented and reflected upon.
 Credit will only be given for work that is demonstrably your own.
 
-Did you use Generative AI for this assignment? [ NO / YES ]
+Did you use Generative AI for this assignment? [ YES ]
 
 a. TOOLS & VERSIONS USED (e.g., ChatGPT 4o, Claude 3.5 Sonnet):
-________________________________________________________________
+Grok 4.7 High on Cursor IDE.
 
 b. ACTUAL USE vs. INTENT:
-Describe how you actually used the tool(s). Did your usage align 
-with your initial learning intent? State specific prompts or 
-use-cases (e.g., explaining error messages, brainstorming edge 
+Describe how you actually used the tool(s). Did your usage align
+with your initial learning intent? State specific prompts or
+use-cases (e.g., explaining error messages, brainstorming edge
 cases, reviewing conceptual understanding).
 
+Yes, my usage aligned with my initial learning intent. I used
+the GenAI exactly as I mentioned in the "State briefly how you
+intended GenAI to support your learning"
 
+Prompt: Double check the Handle Command-Line Arguments code. I
+think I have some syntax erros and spelling errors which is
+stopping my code from compiling
 
+Prompt: Can you correctly update the readme and merge the
+readme files together.
+
+Prompt: Now what else is left to do?
+
+Prompt: Update the main function in main.cpp but do not write
+the code in editor. Just give me the updated code in chat and
+explain what i was doing wrong.
+
+Prompt: Now lets start coding. I will work on different parts.
+
+1. Handle Command-Line Arguments & Load Files
+2. Parse the Path Commands
+3. Layout, Spacing, and Scaling
+4. Implement Interactivity (Scaling & Scrolling)
+
+Use cases: explaining debugging issues, brainstorming, planning,
+reviewing concep understanding.
 
 c. CRITICAL EVALUATION:
-How did you verify the accuracy of the outputs generated by the AI? 
-Describe any instances where the tool gave incorrect, suboptimal, 
+How did you verify the accuracy of the outputs generated by the AI?
+Describe any instances where the tool gave incorrect, suboptimal,
 or misleading guidance, and how you corrected it.
 
+I verified the outside my building/compiling and testing the code
+again and again and tested it in real time on whatever part the
+GenAI worked on.
 
+I know the requirements and what exactly i am building which made
+the testing easy.
 
+GenAI gave me the wrong outputs for the keyboard arrow keys. It
+gave a code segment in the chat which turned the implement of
+left and right arrows in the opposite direction and i tested it
+and fixed it myself.
 
 d. INFLUENCE ON FINAL SUBMISSION & LEARNING:
-Reflect on how using (or intentionally avoiding) GenAI influenced 
-your final submission. How did this tool impact your understanding 
-of the core concepts in this assignment compared to working 
-through them without AI assistance?
+Reflect on how using (or intentionally avoiding) GenAI influenced
+your final submission. How did this tool impact your understanding
+of the core concepts in this assignment compared to working
+through them without AI assistance.
 
+As mentioned above, I always dedude the problem and solution
+myself. Even without GenAI, since highschool, I am using GitHub
+repos and different stack overflow pages which really clears my
+understanding of different concepts.
 
-
+Without, GenAI, the work would be a bit slower and i would spend
+a lot of time on formatting and finding small problems such as
+fixing the spelling mistakes which is blocking my code from
+compiling.
 
 ================================================================
