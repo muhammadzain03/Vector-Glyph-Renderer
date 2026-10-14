@@ -13,6 +13,10 @@
 std::unique_ptr<Triangle> triangle;
 std::vector<Point> textLines;
 
+// 1 means "just fits the window". arrows change these.
+float zoom = 1.f;
+float scroll = 0.f;
+
 void renderingThread(sf::RenderWindow &window, std::atomic<bool> &running, std::atomic<bool> &contextReady) {
     if (!window.setActive(true)) {
         std::cerr << "CRITICAL: Thread failed to claim context!" << std::endl;
@@ -47,11 +51,19 @@ void renderingThread(sf::RenderWindow &window, std::atomic<bool> &running, std::
 
         // two points in a row make one line
         if (!textLines.empty()) {
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+            glLoadIdentity();
+            glTranslatef(scroll, 0.f, 0.f);
+            glScalef(zoom, zoom, 1.f);
+
             glColor3f(0.9f, 0.9f, 0.9f); // Gemini helped deciding the colors
             glEnableClientState(GL_VERTEX_ARRAY);
             glVertexPointer(2, GL_FLOAT, 0, textLines.data());
             glDrawArrays(GL_LINES, 0, static_cast<GLsizei>(textLines.size()));
             glDisableClientState(GL_VERTEX_ARRAY);
+
+            glPopMatrix();
         }
 
         window.display();
@@ -78,6 +90,7 @@ int main(int argc, char* argv[]) {
     textLines = layoutText(glyphs);
 
     std::cout << "Rendering: " << text << std::endl;
+    std::cout << "Left/Right scrolls, Up/Down zooms\n";
     for (const Glyph &glyph : glyphs) {
         std::cout << " '" << glyph.character << "' " << glyph.commands.size() << " commands\n";
     }
@@ -95,8 +108,8 @@ int main(int argc, char* argv[]) {
         settings
     );
 
-    // set additional window properties
-    window.setKeyRepeatEnabled(false);
+    // repeat on so holding an arrow keeps moving
+    window.setKeyRepeatEnabled(true);
 
     // DO NOT LIMIT FRAME RATE! Use elapsed time to control updates.
 
@@ -142,11 +155,20 @@ int main(int argc, char* argv[]) {
             }
 
             if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-                // Key press events are used to trigger actions, not to hold them down.
-            }
+                if (keyPressed->scancode == sf::Keyboard::Scan::Left)
+                    scroll -= 0.06f;
+                if (keyPressed->scancode == sf::Keyboard::Scan::Right)
+                    scroll += 0.06f;
+                if (keyPressed->scancode == sf::Keyboard::Scan::Up)
+                    zoom *= 1.1f;
+                if (keyPressed->scancode == sf::Keyboard::Scan::Down)
+                    zoom /= 1.1f;
 
-            if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>()) {
-                // key release events are used to trigger actions, not to hold them down.
+                // don't let it vanish or blow up
+                if (zoom < 0.3f)
+                    zoom = 0.3f;
+                if (zoom > 6.f)
+                    zoom = 6.f;
             }
         }
     }

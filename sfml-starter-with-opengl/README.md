@@ -1,11 +1,27 @@
-# CMake SFML Project Template (with OpenGL)
+# Vector Glyph Renderer
 
-Use this template repository if you would like to mix SFML Graphics with OpenGL. 
+CPSC 453 Homework 2. Draws a command-line string as outlines from the Computer Modern typewriter font (`cmuntt`). Cubic `C` commands are sampled into short lines. The sentence fits in the window when the program starts.
 
-This template is based on the [original template repository](https://github.com/SFML/cmake-sfml-project) provided by SFML. The only changes made are to some compilation flags. In particular, building of network and audio components in disabled as we do not need these components in the course. This modified version should also compile without issues in the graphics lab (MS 239)
+Built on the course SFML + OpenGL 2.1 starter. Audio and network are off. GLAD loads OpenGL.
 
-Additionally, OpenGL is set up via [GLAD](https://wikis.khronos.org/opengl/OpenGL_Loading_Library). For cross-platform compatibility, this repositroty uses an older version of OpenGL (2.1) as there is currently an [issue with mixing SFML Graphics with OpenGL on MacOS](https://www.sfml-dev.org/tutorials/3.0/window/opengl/). 
+## Run
 
-For questions or concerns, please get in touch with the instructor or one of the TAs.
+From this folder:
 
+```powershell
+cmake -B build
+cmake --build build
+.\build\bin\main.exe "The quick brown fox jumps over the lazy dog"
+```
 
+## Controls
+
+- Left / Right: scroll
+- Up / Down: zoom
+
+## References
+
+The cubic Bézier sampling follows:
+
+- Guidev, [Bezier Curves Explained](https://www.youtube.com/watch?v=pnYccz1Ha34)
+- Freya Holmér, [The Beauty of Bézier Curves](https://www.youtube.com/watch?v=aVwxzDHniEw&t=19s)
