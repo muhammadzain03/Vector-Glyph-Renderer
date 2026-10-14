@@ -11,8 +11,9 @@
 #include "triangle.h"
 
 std::unique_ptr<Triangle> triangle;
+std::vector<Point> textLines;
 
-void renderingThread(sf::RenderWindow& window, std::atomic<bool>& running, std::atomic<bool>& contextReady) {
+void renderingThread(sf::RenderWindow &window, std::atomic<bool> &running, std::atomic<bool> &contextReady) {
     if (!window.setActive(true)) {
         std::cerr << "CRITICAL: Thread failed to claim context!" << std::endl;
         contextReady = true;
@@ -39,25 +40,20 @@ void renderingThread(sf::RenderWindow& window, std::atomic<bool>& running, std::
     sf::View view(sf::Vector2f(0.f, 0.f), sf::Vector2f(2.f, -2.f));
     window.setView(view);
 
-    // Background and alpha blending (for transparency)
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    sf::CircleShape circ;
-    circ.setRadius(0.4f);
-    circ.setPointCount(100);
-    circ.setPosition(sf::Vector2f(-0.4f, -0.4f));
-    circ.setFillColor(sf::Color(150, 50, 250));
-    circ.setOutlineThickness(0.01f);
-    circ.setOutlineColor(sf::Color(250, 150, 100));
 
     while (running) {
         glClear(GL_COLOR_BUFFER_BIT);
-        window.draw(*triangle);
-        window.pushGLStates(); // Save OpenGL states before drawing SFML shapes
-        window.draw(circ);
-        window.popGLStates(); // Restore OpenGL states after drawing SFML shapes
+
+        // two points in a row make one line
+        if (!textLines.empty()) {
+            glColor3f(0.9f, 0.9f, 0.9f); // Gemini helped deciding the colors
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(2, GL_FLOAT, 0, textLines.data());
+            glDrawArrays(GL_LINES, 0, static_cast<GLsizei>(textLines.size()));
+            glDisableClientState(GL_VERTEX_ARRAY);
+        }
+
         window.display();
     }
 
@@ -79,9 +75,10 @@ int main(int argc, char* argv[]) {
 
     const std::string text = sentence.str();
     const std::vector<Glyph> glyphs = loadGlyphs(text, "../cmuntt");
+    textLines = layoutText(glyphs);
 
     std::cout << "Rendering: " << text << std::endl;
-    for (const Glyph& glyph : glyphs) {
+    for (const Glyph &glyph : glyphs) {
         std::cout << " '" << glyph.character << "' " << glyph.commands.size() << " commands\n";
     }
 
@@ -146,12 +143,10 @@ int main(int argc, char* argv[]) {
 
             if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
                 // Key press events are used to trigger actions, not to hold them down.
-                (void)keyPressed;
             }
 
             if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>()) {
                 // key release events are used to trigger actions, not to hold them down.
-                (void)keyReleased;
             }
         }
     }

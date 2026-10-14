@@ -24,5 +24,7 @@ struct Glyph {
 // cmun.. --> font data folders
 // choosing "cmuntt" folder --> Computer Modern Typewriter, the regular style. 
 // The italic typewriter font is the separate folder "cmunti".
-std::vector<Glyph> loadGlyphs(const std::string& text, const std::string& fontFolder = "../cmuntt");
+std::vector<Glyph> loadGlyphs(const std::string &text, const std::string &fontFolder = "../cmuntt");
 
+// turns the glyphs into line endpoints. 2 points in a row = 1 line.
+std::vector<Point> layoutText(const std::vector<Glyph> &glyphs);
