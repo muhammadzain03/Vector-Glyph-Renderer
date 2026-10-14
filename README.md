@@ -2,11 +2,11 @@
 
 CPSC 453 Homework 2. Draws a command-line string as outlines from the Computer Modern typewriter font (`cmuntt`). Cubic `C` commands are sampled into short lines. The sentence fits in the window when the program starts.
 
-Built on the course SFML + OpenGL 2.1 starter. Audio and network are off. GLAD loads OpenGL.
+Built on the course SFML + OpenGL 2.1 starter in `sfml-starter-with-opengl`. Audio and network are off. GLAD loads OpenGL.
 
 ## Run
 
-From this folder:
+From `sfml-starter-with-opengl`:
 
 ```powershell
 cmake -B build
@@ -18,6 +18,20 @@ cmake --build build
 
 - Left / Right: scroll
 - Up / Down: zoom
+
+## Fonts
+
+The Computer Modern Unicode fonts are included next to the starter:
+
+- cmunit - Typewriter-Italic
+- cmunrm - Serif-Roman
+- cmunsi - SansSerif-Oblique
+- cmunsl - Serif-RomanSlanted
+- cmunss - SansSerif
+- cmunti - Serif-Italic
+- cmuntt - Typewriter-Regular
+
+This program uses `cmuntt`. More on these fonts: http://canopus.iacp.dvo.ru/~panov/cm-unicode/
 
 ## References
 
