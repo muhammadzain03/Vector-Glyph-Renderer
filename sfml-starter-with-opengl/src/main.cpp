@@ -5,6 +5,9 @@
 #include <iostream>
 #include "triangle.h"
 
+#include <sstream>
+#include "glyph.h"
+
 std::unique_ptr<Triangle> triangle;
 
 void renderingThread(sf::RenderWindow& window, std::atomic<bool>& running, std::atomic<bool>& contextReady)
@@ -65,7 +68,26 @@ void renderingThread(sf::RenderWindow& window, std::atomic<bool>& running, std::
 }
 
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        std::cerr << "Usage: main \"The quick brown fox jumps over the lazy dog\"\n";
+        return 1;
+    }
+
+    std::ostringstream sentence;
+    for (int i = 1; i < argc; ++i) {
+        if (i > 1)
+            sentence << ' ';
+        sentence << argv[i];
+    }
+
+    const std::string text = sentence.str();
+    const std::vector<Glyph> glyphs = loadGlyphs(text, "../cmuntt");
+
+    std::cout << "Rendering: " << text << std::endl;
+    for (const Glyph &glyph : glyphs) {
+        std::cout << " '" << glyph.character << "' " << glyph.lines.size() << " commands\n";
+    }
 
 	sf::ContextSettings settings;
     settings.majorVersion = 2;

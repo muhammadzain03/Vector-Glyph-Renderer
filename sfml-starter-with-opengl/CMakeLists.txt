@@ -24,6 +24,7 @@ add_executable(main
   src/main.cpp
   src/triangle.cpp
   src/opengl_loader.cpp
+  src/glyph.cpp
 )
 
 # Tell compiler where to find gl.h
